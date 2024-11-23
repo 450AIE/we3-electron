@@ -1,0 +1,40 @@
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding:10px;
+    background-image: url('https://minio.cqupt.edu.cn/wecqupt/common/background.jpg');
+    background-size: 100% 100%;
+    :global {
+        .input-box {
+            position: absolute;
+            width: 90%;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            .input {
+                width: 100%;
+                margin:10px 0;
+                height: 40px;
+            }
+        }
+        .privacy {
+            position: absolute;
+            bottom: 130px;
+            width: 90%;
+            left: 30px;
+        }
+        .login-btn {
+            position: absolute;
+            bottom: 70px;
+            background-color: #47ce7c!important;
+            color: #fff!important;
+            width: 90%;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 40px;
+        }
+    }
+}
