@@ -5,7 +5,7 @@ export const routes = [
     {
         path: '/timeTable',
         name: 'timeTable',
-        component: null
+        component: lazy(() => import('@renderer/pages/timeTable'))
     },
     {
         path: '/my',
@@ -37,6 +37,11 @@ export const routes = [
     {
         path: '/setting',
         name: 'setting',
+        component: null
+    },
+    {
+        path: '/more',
+        name: 'more',
         component: null
     }
 ];

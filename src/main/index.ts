@@ -5,7 +5,7 @@ import icon from '../../resources/icon.png?asset';
 import request from '../renderer/src/utils/http';
 import { LOGIN_WINDOW, MAIN_WINDOW, WeCQUPT_Window } from './types';
 // 维护window栈
-const windowStack: WeCQUPT_Window[] = [];
+let windowStack: WeCQUPT_Window[] = [];
 function pushWindow(name, win) {
     windowStack.push({
         windowName: name,
@@ -17,6 +17,7 @@ function popWindow(name) {
 }
 
 function createWindow(windowName) {
+    console.log('开创窗口', windowName);
     switch (windowName) {
         case LOGIN_WINDOW:
             createLoginWindow();
@@ -64,9 +65,9 @@ function createMainWindow(): void {
     // HMR for renderer base on electron-vite cli.
     // Load the remote URL for development or the local html file for production.
     if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-        win.loadURL(process.env['ELECTRON_RENDERER_URL'] + '/#/home');
+        win.loadURL(process.env['ELECTRON_RENDERER_URL'] + '/#/timeTable');
     } else {
-        win.loadFile(join(__dirname, '../renderer/index.html'), { hash: '/home' });
+        win.loadFile(join(__dirname, '../renderer/index.html'), { hash: '/timeTable' });
     }
 }
 
@@ -103,16 +104,17 @@ function createLoginWindow(): void {
     // HMR for renderer base on electron-vite cli.
     // Load the remote URL for development or the local html file for production.
     if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-        mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'] + '/#/login');
+        loginWindow.loadURL(process.env['ELECTRON_RENDERER_URL'] + '/#/login');
     } else {
-        mainWindow.loadFile(join(__dirname, '../renderer/index.html'), { hash: 'login' });
+        loginWindow.loadFile(join(__dirname, '../renderer/index.html'), { hash: 'login' });
     }
 }
 
 function destoryWindow(windowName): void {
     const win = windowStack.find((window) => window.windowName === windowName);
+    // console.log(win);
     if (win) {
-        win.destory();
+        win.window.destroy();
     }
 }
 
@@ -153,3 +155,10 @@ ipcMain.handle('request', async (e, config) => {
 ipcMain.on('createWindow', (_, windowName) => createWindow(windowName));
 
 ipcMain.on('destoryWindow', (_, windowName) => destoryWindow(windowName));
+
+// 将渲染进程发送来到函数和形参转发给所有窗口
+ipcMain.on('notify-all-window-update-state-from-renderer-process', (_, funcName, args) => {
+    windowStack.forEach(({ window }) => {
+        window.webContents.send('notify-all-window-update-state-from-main-process', funcName, args);
+    });
+});

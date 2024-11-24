@@ -1,25 +1,30 @@
 import { getVertificationCodeAPI, loginAPI } from '@renderer/apis/login';
-import { throttle } from 'lodash';
+import { isElement, throttle } from 'lodash';
 import { Fragment, useEffect, useState } from 'react';
 import { Button, Input, message } from 'antd';
 import styles from './index.module.scss';
 import LoginInput from './Input';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { LOGIN_WINDOW, MAIN_WINDOW } from '@renderer/utils/windowTypes';
+import useUserStore from '@renderer/store/userStore';
+import useUpdateStateSync from '@renderer/hooks/useUpdateStateSync';
 
 export function Login() {
+    useUpdateStateSync();
+    //
+    const { userInfo, setUserInfo } = useUserStore();
     // 隐私政策
     const [checkPrivity, setCheckPrivity] = useState<Boolean>(true);
     // 帮助弹窗
     const [modal, setModalOpen] = useState(false);
     // 统一认证码的值
-    const [account, setAccount] = useState<string>();
+    const [account, setAccount] = useState<string>('1686965');
     // 密码的值
-    const [password, setPassword] = useState<string>();
+    const [password, setPassword] = useState<string>('1104850836L');
     // 验证码的值
     const [vertification, setVertification] = useState<string>();
     // 表示是否需要验证码
-    const [isNeedVertification, setIsNeedVertification] = useState<Boolean>(false);
+    const [isNeedVertification, setIsNeedVertification] = useState<boolean>(false);
     // base64字符串验证码
     const [vertificationBase64, setVertificationBase64] = useState<string>('');
     useEffect(() => {
@@ -54,10 +59,12 @@ export function Login() {
         } else {
             try {
                 const res = await loginAPI(account, password, vertification);
-                if (res.msg === '登陆成功') {
+                setUserInfo(res.data.user_info);
+                // console.log(userInfo);
+                if (res.msg === '登录成功') {
                     // 开辟新窗口，销毁登陆页的窗口
                     IPC.createWindow(MAIN_WINDOW);
-                    IPC.destoryWindow(LOGIN_WINDOW);
+                    IPC.destroyWindow(LOGIN_WINDOW);
                 }
             } catch (error) {
                 console.warn(error);

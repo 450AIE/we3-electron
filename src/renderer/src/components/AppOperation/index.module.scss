@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    right: 0;
+    top: 0;
+    width: 100px;
+    height: 40px;
+    :global {
+        .icon {
+            flex:1;
+            padding-left:10px;
+        }
+    }
+}

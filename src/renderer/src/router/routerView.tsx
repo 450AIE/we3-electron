@@ -45,5 +45,5 @@ function Element(props) {
 }
 
 function LoadingElement() {
-    return <Spin indicator={<LoadingOutlined />} spin fullscreen={true} delay={1500} />;
+    return <Spin indicator={<LoadingOutlined />} spin fullscreen delay={1500} />;
 }
