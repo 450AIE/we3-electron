@@ -30,6 +30,7 @@ export interface TimeTableGlobalParams {
     utils: {
         getWitchDayInThisWeek: Function;
         getTheDateIsInWitchWeek: Function;
+        findOneLessonInfo: Function;
     };
     // 这些我也不知道是什么
     // ifStorage: boolean;
@@ -53,7 +54,7 @@ export interface TimeTableGlobalParams {
     // changeAtToastAttrs: Function;
 }
 
-interface LessonInfo {
+export interface LessonInfo {
     data: {
         chief_invigilator: string;
         class_id: string;

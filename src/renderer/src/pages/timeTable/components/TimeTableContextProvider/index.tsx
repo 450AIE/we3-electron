@@ -50,6 +50,22 @@ function TimeTableContextProvider({ children }) {
     useEffect(() => {
         getLessonData(currentPage, 1, 1, true);
     }, [currentPage]);
+    /**
+     *
+     * @param date 日期，比如“2020-10-01”
+     * @param id 该课程的id号
+     * @param startClock 该课程在该天的time_slots[0]
+     */
+    function findOneLessonInfo(date, id, startClock) {
+        // 这个date所在的星期的课表
+        const lessonArr = lessonInfoMap.get(getTheDateIsInWitchWeek(date));
+        // 找出所需的课程
+        return lessonArr.find((lesson) => {
+            if (lesson.date === date && lesson.id === id && lesson.time_slots[0] == startClock) {
+                return true;
+            }
+        });
+    }
     async function getTime() {
         const res = await getTermTime();
         localStorage.setItem(
@@ -86,6 +102,7 @@ function TimeTableContextProvider({ children }) {
         // 缓存的数据的期限是多少，我们先实现带有效期的缓存吧
         if (res) {
             const lessonArr = unionWith(lessonsInfo, res.data.schedules, isEqual);
+            console.log('原来：', lessonsInfo, '现在:', lessonArr);
             if (backWeekNum === 0 && advanceWeekNum === 0) {
                 setLessonDataCache(weekNum, lessonArr);
             } else {
@@ -168,7 +185,8 @@ function TimeTableContextProvider({ children }) {
         setCurrentPage,
         utils: {
             getWitchDayInThisWeek,
-            getTheDateIsInWitchWeek
+            getTheDateIsInWitchWeek,
+            findOneLessonInfo
         }
     };
     console.log(value);

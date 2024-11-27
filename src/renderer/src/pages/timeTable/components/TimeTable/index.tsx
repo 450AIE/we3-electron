@@ -4,6 +4,8 @@ import TimeTableOnePage from '../TimeTableOnePage';
 import styles from './index.module.scss';
 import { Carousel } from 'antd';
 import { getCurrentDate } from '@renderer/utils/date';
+import LessonDetail from '../LessonDetail';
+import { LessonInfo } from '../../types';
 
 function TimeTableContent() {
     const {
@@ -11,8 +13,10 @@ function TimeTableContent() {
         setCurrentPage,
         currentPage,
         lessonInfoMap,
-        utils: { getTheDateIsInWitchWeek }
+        utils: { getTheDateIsInWitchWeek, findOneLessonInfo }
     } = useTimeTableContext();
+    const [isOpenLessonDetai, setIsOpenLessonDetail] = useState<boolean>(false);
+    const [clickLessonInfo, setClickLessonInfo] = useState<LessonInfo | null>(null);
     // console.log('table渲染了', currentPage);
     function swiperToSetCurrentPage(current, next) {
         console.log(current, next);
@@ -36,8 +40,25 @@ function TimeTableContent() {
         return lessonInfoMap.get(weekNum);
         // }
     }
+    function openLessonDetail(e) {
+        let findTimes = 0;
+        let dom = e.target;
+        let parent = dom;
+        while (![...dom.classList].includes('one-lesson')) {
+            // 优化一下，不能一直走，否则太浪费性能，4次没找到说明点击的不是课程
+            if (findTimes >= 3) return;
+            parent = parent.parentNode;
+            dom = parent;
+            findTimes++;
+        }
+        const { date, id, startclock: startClock } = dom.dataset;
+        const lessonInfo = findOneLessonInfo(date, id, startClock);
+        setClickLessonInfo(lessonInfo);
+        setIsOpenLessonDetail(true);
+    }
     return (
-        <div className={styles.container}>
+        // 事件委托打开课表详情
+        <div className={styles.container} onClick={openLessonDetail}>
             <Carousel
                 dots={false}
                 adaptiveHeight
@@ -53,6 +74,11 @@ function TimeTableContent() {
                     </div>
                 ))}
             </Carousel>
+            <LessonDetail
+                isOpen={isOpenLessonDetai}
+                lessonInfo={clickLessonInfo}
+                setIsOpen={setIsOpenLessonDetail}
+            />
         </div>
     );
 }

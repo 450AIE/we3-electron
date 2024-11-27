@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { getLocation } from '../../utils/common';
+import { darkenColor, getBgColor, getLocation } from '../../utils/common';
 import { useTimeTableContext } from '../TimeTableContextProvider';
 import styles from './index.module.scss';
 
@@ -16,14 +16,19 @@ const TimeTableOnePage = memo(({ lessonInfo, weekNum }) => {
                     // 注意后续要根据是否左侧展开加入判断100/12还是13,14
                     <div
                         className="one-lesson"
-                        key={lesson.id}
+                        key={lesson.id + lesson.date}
+                        data-id={lesson.id}
+                        data-startClock={lesson.time_slots[0]}
+                        data-date={lesson.date}
                         style={{
                             height: (100 / 12).toFixed(3) * lesson.time_slots.length + '%',
                             width: (100 / 7).toFixed(3) + '%',
                             top: (lesson.time_slots[0] - 1) * (100 / 12).toFixed(3) + '%',
                             left:
                                 getWitchDayInThisWeek(lesson.date, weekNum) * (100 / 7).toFixed(3) +
-                                '%'
+                                '%',
+                            backgroundColor: getBgColor(lesson.time_slots),
+                            color: darkenColor(getBgColor(lesson.time_slots))
                         }}
                     >
                         <span className="title">
