@@ -8,6 +8,7 @@ import { QuestionCircleOutlined } from '@ant-design/icons';
 import { LOGIN_WINDOW, MAIN_WINDOW } from '@renderer/utils/windowTypes';
 import useUserStore from '@renderer/store/userStore';
 import useUpdateStateSync from '@renderer/hooks/useUpdateStateSync';
+import AppOperation from '@renderer/components/AppOperation';
 
 export function Login() {
     useUpdateStateSync();
@@ -73,41 +74,44 @@ export function Login() {
     }
     const getVertificationCodeWithThrottle = throttle(getVertification, 1000);
     return (
-        <div className={styles.container}>
-            {contextHolder}
-            <div className="input-box">
-                <LoginInput
-                    setStateFunc={setAccount}
-                    placeholder="请输入统一验证码"
-                    className="input"
-                />
-                <LoginInput
-                    type="password"
-                    setStateFunc={setPassword}
-                    placeholder="请输入密码"
-                    className="input"
-                />
-                <LoginInput
-                    setStateFunc={setVertification}
-                    placeholder="请输入验证码"
-                    type="vertification"
-                    base64={vertificationBase64}
-                    flushVertificationFunc={getVertificationCodeWithThrottle}
-                    className="input"
-                />
+        <>
+            <div className={styles.container}>
+                <AppOperation />
+                {contextHolder}
+                <div className="input-box">
+                    <LoginInput
+                        setStateFunc={setAccount}
+                        placeholder="请输入统一验证码"
+                        className="input"
+                    />
+                    <LoginInput
+                        type="password"
+                        setStateFunc={setPassword}
+                        placeholder="请输入密码"
+                        className="input"
+                    />
+                    <LoginInput
+                        setStateFunc={setVertification}
+                        placeholder="请输入验证码"
+                        type="vertification"
+                        base64={vertificationBase64}
+                        flushVertificationFunc={getVertificationCodeWithThrottle}
+                        className="input"
+                    />
+                </div>
+                <div className="privacy">
+                    <span>
+                        我已阅读并同意 <span style={{ color: '#47ce7c' }}>隐私政策</span>
+                    </span>
+                    <span style={{ marginLeft: '10px' }}>
+                        <QuestionCircleOutlined />
+                        <span style={{ marginLeft: '4px' }}>帮助</span>
+                    </span>
+                </div>
+                <Button onClick={login} className="login-btn">
+                    登陆
+                </Button>
             </div>
-            <div className="privacy">
-                <span>
-                    我已阅读并同意 <span style={{ color: '#47ce7c' }}>隐私政策</span>
-                </span>
-                <span style={{ marginLeft: '10px' }}>
-                    <QuestionCircleOutlined />
-                    <span style={{ marginLeft: '4px' }}>帮助</span>
-                </span>
-            </div>
-            <Button onClick={login} className="login-btn">
-                登陆
-            </Button>
-        </div>
+        </>
     );
 }

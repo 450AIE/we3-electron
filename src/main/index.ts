@@ -38,6 +38,7 @@ function createMainWindow(): void {
         show: false,
         minHeight: 1000,
         minWidth: 750,
+        frame: false,
         alwaysOnTop: true,
         autoHideMenuBar: true,
         ...(process.platform === 'linux' ? { icon } : {}),
@@ -81,6 +82,7 @@ function createLoginWindow(): void {
         show: false,
         resizable: false,
         alwaysOnTop: true,
+        frame: false,
         autoHideMenuBar: true,
         ...(process.platform === 'linux' ? { icon } : {}),
         webPreferences: {
@@ -190,3 +192,14 @@ ipcMain.on('notify-all-window-update-state-from-renderer-process', (_, funcName,
         window.webContents.send('notify-all-window-update-state-from-main-process', funcName, args);
     });
 });
+
+ipcMain.on('minimize', () => BrowserWindow.getFocusedWindow().minimize());
+ipcMain.on('maximize', () => {
+    if (BrowserWindow.getFocusedWindow().isMaximized()) {
+        BrowserWindow.getFocusedWindow().restore();
+    } else {
+        BrowserWindow.getFocusedWindow().maximize();
+    }
+});
+//只剩一个页面了会退出app
+ipcMain.on('closeWindow', () => BrowserWindow.getFocusedWindow().close());

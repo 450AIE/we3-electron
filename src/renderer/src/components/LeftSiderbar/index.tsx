@@ -5,11 +5,11 @@ import useUserStore from '@renderer/store/userStore';
 function LeftSiderbar() {
     // 在登录页不出现
     const location = useLocation();
-    if (location.pathname === '/login') return null;
+    if (location.pathname === '/login') return;
     const userStore = useUserStore();
     const { leftSiderbarOptionsArr, setLeftSiderbarOptionsArr, userInfo } = userStore;
     console.log(userInfo);
-    return <div>我是侧边栏</div>;
+    return <div className={styles.container}>22</div>;
 }
 
 export default LeftSiderbar;

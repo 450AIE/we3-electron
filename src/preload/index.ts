@@ -11,5 +11,8 @@ contextBridge.exposeInMainWorld('IPC', {
         ipcRenderer.on('notify-all-window-update-state-from-main-process', cb),
     // 组件卸载，清除它的监听事件
     removeListenerToUpdateState: () =>
-        ipcRenderer.removeAllListeners('notify-all-window-update-state-from-main-process')
+        ipcRenderer.removeAllListeners('notify-all-window-update-state-from-main-process'),
+    minimize: () => ipcRenderer.send('minimize'),
+    maximize: () => ipcRenderer.send('maximize'),
+    closeWindow: () => ipcRenderer.send('closeWindow')
 });

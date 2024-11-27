@@ -1,0 +1,22 @@
+.container {
+    height: 30px;
+    position: relative;
+    -webkit-app-region: drag;
+    background-color: #dde3f2;
+    :global {
+        .avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 10px;
+            background: #ccc;
+            border-radius: 50%;
+            font-size: 20px;
+        }
+    }
+}

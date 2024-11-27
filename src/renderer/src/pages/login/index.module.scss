@@ -2,11 +2,13 @@
     position: relative;
     width: 100vw;
     height: 100vh;
-    padding:10px;
+    padding: 10px;
+    -webkit-app-region: drag;
     background-image: url('https://minio.cqupt.edu.cn/wecqupt/common/background.jpg');
     background-size: 100% 100%;
     :global {
         .input-box {
+            -webkit-app-region: no-drag;
             position: absolute;
             width: 90%;
             top: 50%;
@@ -15,22 +17,25 @@
             display: flex;
             flex-direction: column;
             .input {
+                -webkit-app-region: no-drag;
                 width: 100%;
-                margin:10px 0;
+                margin: 10px 0;
                 height: 40px;
             }
         }
         .privacy {
+            -webkit-app-region: no-drag;
             position: absolute;
             bottom: 130px;
             width: 90%;
             left: 30px;
         }
         .login-btn {
+            -webkit-app-region: no-drag;
             position: absolute;
             bottom: 70px;
-            background-color: #47ce7c!important;
-            color: #fff!important;
+            background-color: #47ce7c !important;
+            color: #fff !important;
             width: 90%;
             left: 50%;
             transform: translateX(-50%);
