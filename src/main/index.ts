@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron';
+import { app, shell, BrowserWindow, ipcMain, session } from 'electron';
 import { join } from 'path';
 import { electronApp, optimizer, is } from '@electron-toolkit/utils';
 import icon from '../../resources/icon.png?asset';
@@ -33,10 +33,11 @@ function createWindow(windowName) {
 // 这个要做尺寸的缓存
 function createMainWindow(): void {
     const win = new BrowserWindow({
-        width: 800,
-        height: 800,
+        width: 750,
+        height: 1000,
         show: false,
-        resizable: false,
+        minHeight: 1000,
+        minWidth: 750,
         alwaysOnTop: true,
         autoHideMenuBar: true,
         ...(process.platform === 'linux' ? { icon } : {}),
@@ -138,6 +139,33 @@ app.whenReady().then(() => {
         // On macOS it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
+    });
+    // 这里增加对请求头的劫持
+    // session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
+    //     details.requestHeaders['Referer'] =
+    //         'https://servicewechat.com/wx8227f55dc4490f45/devtools/page-frame.html';
+    //     callback({ cancel: false, requestHeaders: details.requestHeaders });
+    // });
+    // 这里增加对响应头的劫持
+    session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+        let newHeaders = details.responseHeaders;
+        let setCookie = details.responseHeaders['set-cookie'];
+        if (setCookie) {
+            setCookie = setCookie.map((cookie) => {
+                cookie = cookie.replace('SameSite', 'SameSite=None');
+                cookie = cookie.replace('HttpOnly;', '');
+                cookie = cookie.replace('domain=we.cqupt.edu.cn; path=/;', '');
+                return cookie;
+            });
+            // setCookie = setCookie.replace('SameSite', 'SameSite=None');
+            // setCookie = setCookie.replace('HttpOnly;', '');
+            // setCookie = setCookie.replace('domain=we.cqupt.edu.cn; path=/;', '');
+            newHeaders = {
+                ...details.responseHeaders,
+                'set-cookie': setCookie
+            };
+        }
+        callback({ cancel: false, responseHeaders: newHeaders });
     });
 });
 

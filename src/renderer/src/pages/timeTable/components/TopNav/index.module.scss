@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    :global {
+        .week-icon {
+            width: 100%;
+            height: 100%;
+            flex:0.777;
+            background:url('../../../../assets/timetable/week.jpg') no-repeat ;
+            background-size: 80% 80%;
+            background-position: center;
+        }
+        .item {
+            flex:1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+}
