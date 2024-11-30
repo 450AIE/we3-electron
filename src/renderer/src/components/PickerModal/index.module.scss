@@ -1,0 +1,29 @@
+.container {
+    :global {
+        .options-box {
+            overflow-y: scroll;
+            max-height: 50vh;
+            .one-option {
+                user-select: none;
+                height: 10vh;
+                margin: 10px;
+                font-size: 18px;
+                display: flex;
+                cursor: pointer;
+                align-items: center;
+                justify-content: center;
+                // background-color: lightcoral;s
+                &:hover {
+                    background-color: rgba(111, 204, 133, 0.5);
+                    border-radius: 10px;
+                    color: #fff;
+                }
+                &.active {
+                    background-color: #6fcc85;
+                    border-radius: 10px;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

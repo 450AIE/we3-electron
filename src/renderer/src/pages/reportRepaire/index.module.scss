@@ -3,5 +3,19 @@
     height: 100%;
     padding: 10px;
     :global {
+        .submit-btn {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 60%;
+            height: 6vh;
+            transform: translateX(-50%);
+            background-color: #6fcc85;
+            color: #fff;
+            &:hover {
+                background-color: #6fcc85 !important;
+                color: #fff !important;
+            }
+        }
     }
 }

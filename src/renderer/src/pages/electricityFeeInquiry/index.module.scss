@@ -1,0 +1,90 @@
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    background-color: #fcfefd;
+    :global {
+        .top-card {
+            flex: 3;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(40deg, #f9fdfa, #e6faed);
+            .dormitory {
+                flex: 4;
+                background-color: gainsboro;
+            }
+            .top-detail-fee {
+                flex: 6;
+                display: flex;
+                position: relative;
+                .this-month-costs {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+                .rest-money {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                }
+                .this-month-costs,
+                .rest-money {
+                    display: flex;
+                    flex-direction: column;
+                }
+                .title {
+                    flex: 2;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .number {
+                    flex: 8;
+                    font-weight: 700;
+                }
+                .orange {
+                    font-size: 24px;
+                    color: orange;
+                }
+            }
+        }
+        .details-box {
+            flex: 4;
+            .one-detail {
+                display: flex;
+                position: relative;
+                align-items: center;
+                padding: 10px;
+                height: 10vh;
+                border-radius: 10px;
+                margin-top: 10px;
+                background: linear-gradient(to right, #f9fdfa, #e6faed);
+                .title {
+                    position: absolute;
+                    left: 10px;
+                }
+                .detail-fee {
+                    position: absolute;
+                    right: 10px;
+                }
+            }
+        }
+        .time-tips {
+            display: flex;
+            flex-direction: column;
+            .as-of-time {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .update-time {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+}

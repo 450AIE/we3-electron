@@ -47,6 +47,11 @@ export const routes = [
         path: '/reportRepaire',
         name: 'reportRepaire',
         component: lazy(() => import('@renderer/pages/reportRepaire'))
+    },
+    {
+        path: '/electricityFeeInquery',
+        name: 'electricityFeeInquery',
+        component: lazy(() => import('@renderer/pages/electricityFeeInquiry'))
     }
 ];
 
