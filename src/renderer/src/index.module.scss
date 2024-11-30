@@ -1,4 +1,27 @@
 .container {
     width: 100%;
     height: calc(100vh - 30px);
+    background-color: #dde3f2;
+}
+:global {
+    .beautify-scrollbar {
+        &::-webkit-scrollbar {
+            width: 8px; /* 滚动条宽度 */
+            background-color: transparent; /* 滚动条轨道背景色 */
+        }
+        /* 对应scrollbar的拖动的那个滑块 */
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3); /* 滚动条滑块颜色 */
+            border-radius: 10px; /* 滚动条滑块边角半径 */
+        }
+        /* 对应scrollbar左右，上下两侧的两个箭头按钮 */
+        &::-webkit-scrollbar-button {
+            display: none; /* 隐藏滚动条按钮 */
+        }
+        /* 箭头按钮所在位置 */
+        &::-webkit-scrollbar-corner {
+            /* display: none; */
+            background-color: transparent; /* 滚动条轨道角落颜色 */
+        }
+    }
 }

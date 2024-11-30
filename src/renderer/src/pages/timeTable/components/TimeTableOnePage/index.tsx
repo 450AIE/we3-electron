@@ -18,7 +18,7 @@ const TimeTableOnePage = memo(({ lessonInfo, weekNum }) => {
                         className="one-lesson"
                         key={lesson.id + lesson.date}
                         data-id={lesson.id}
-                        data-startClock={lesson.time_slots[0]}
+                        data-startclock={lesson.time_slots[0]}
                         data-date={lesson.date}
                         style={{
                             height: (100 / 12).toFixed(3) * lesson.time_slots.length + '%',

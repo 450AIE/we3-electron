@@ -19,36 +19,69 @@ const useUserStore = create((set, get) => {
     }
     // status表示是否选择展示在左侧
     const leftSiderbarOptionsArr: LeftSiderbarOption[] = [
-        ({
+        {
             index: 0,
             name: '课表',
             icon: '',
+            link: '/timeTable',
             status: true
         },
         {
-            index: 0,
-            name: '更多',
-            icon: '',
-            status: false
-        },
-        {
-            index: 0,
+            index: 1,
             name: '日历',
             icon: '',
+            link: '/calender',
             status: false
         },
         {
-            index: 0,
+            index: 2,
             name: '物业报修',
             icon: '',
+            link: '/reportRepaire',
             status: false
         },
         {
-            index: 0,
+            index: 3,
             name: '教室查询',
             icon: '',
+            link: '/searchClassroom',
             status: false
-        })
+        },
+        {
+            index: 4,
+            name: '更多',
+            icon: '',
+            link: '/more',
+            status: false
+        },
+        {
+            index: 5,
+            name: '校园资讯',
+            icon: '',
+            link: '/schoolMessage',
+            status: false
+        },
+        {
+            index: 6,
+            name: '失物招领',
+            icon: '',
+            link: '/loseFound',
+            status: false
+        },
+        {
+            index: 7,
+            name: '图书借阅',
+            icon: '',
+            link: '/searchBooks',
+            status: false
+        },
+        {
+            index: 8,
+            name: '电费查询',
+            icon: '',
+            link: '/electricityFeeInquery',
+            status: false
+        }
     ];
     function setLeftSiderbarOptionsArr(newArr) {
         newArr = newArr.sort((cur, next) => cur.index - next.index);

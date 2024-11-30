@@ -69,7 +69,7 @@ function TimeTableContent() {
             >
                 {/* idx就代表周数，第0周要做总的课表 */}
                 {new Array(totalPages).fill(null).map((_, idx) => (
-                    <div className="one-page" key={idx}>
+                    <div className="one-page " key={idx}>
                         <TimeTableOnePage lessonInfo={conveyLessonInfo(idx)} weekNum={idx} />
                     </div>
                 ))}

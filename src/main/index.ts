@@ -33,11 +33,11 @@ function createWindow(windowName) {
 // 这个要做尺寸的缓存
 function createMainWindow(): void {
     const win = new BrowserWindow({
-        width: 750,
-        height: 1000,
+        width: 600,
+        height: 700,
         show: false,
-        minHeight: 1000,
-        minWidth: 750,
+        minHeight: 500,
+        minWidth: 600,
         frame: false,
         alwaysOnTop: true,
         autoHideMenuBar: true,

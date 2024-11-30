@@ -1,0 +1,49 @@
+.container {
+    width: 100%;
+    height: 100%;
+    padding: 10px 10px;
+    :global {
+        .title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 10px;
+        }
+        .term-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 4%;
+            padding: 3px;
+            background-color: red;
+            position: relative;
+            .first-term {
+                height: 100%;
+                margin-right: 60px;
+            }
+            .second-term {
+                height: 100%;
+            }
+            .term-btn {
+                background-color: #44d07c;
+                color: #fff;
+                height: 100%;
+                &:hover {
+                    background-color: #44d07c;
+                    color: #fff;
+                }
+            }
+        }
+        .calender-scroll {
+            .weekday {
+                display: flex;
+                align-items: center;
+                background-color: green;
+                .one-day {
+                    flex: 1;
+                }
+            }
+        }
+    }
+}
