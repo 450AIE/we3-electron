@@ -64,6 +64,11 @@ export const routes = [
                 component: lazy(() => import('@renderer/pages/searchBooks/searchBooksList'))
             }
         ]
+    },
+    {
+        path: '/searchSpareClassroom',
+        name: 'searchSpareClassroom',
+        component: lazy(() => import('@renderer/pages/searchSpareClassroom'))
     }
 ];
 

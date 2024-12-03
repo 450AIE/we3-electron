@@ -1,5 +1,4 @@
 import request from '@renderer/utils/http';
-import { xor } from 'lodash';
 
 export function getBorrowBooksRankListAPI() {
     return request({
@@ -31,7 +30,7 @@ export function getSearchBookHotListAPI(limit?: number = 15) {
     });
 }
 
-export function getSearchBookList(name, pages, limit? = 20) {
+export function getSearchBookListAPI(name, pages, limit? = 20) {
     return request({
         url: `/book/search?limit=${limit}`,
         headers: {

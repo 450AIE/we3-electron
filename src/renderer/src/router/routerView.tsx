@@ -55,7 +55,6 @@ function LoadingElement() {
 export function FirstRouterView() {
     const location = useLocation();
     const { pathname } = location;
-    console.log(location);
     return (
         <Suspense fallback={<LoadingElement />}>
             <Routes>
@@ -72,18 +71,12 @@ export function FirstRouterView() {
 
 export function SecondaryRoutes() {
     const allSecondaryRoutes = extractRoutesWithChildren(routes);
-    console.log(allSecondaryRoutes);
-    // allSecondaryRoutes.flat().map((path) => {
-    //     console.log(path);
-    //     path.includes('null') ? '' : console.log('无', path);
-    // });
     return (
         <Suspense fallback={<LoadingElement />}>
             <Routes>
                 {allSecondaryRoutes.map((path, index) => {
                     let Component;
                     const hasChildrenCompoent = Array.isArray(path);
-                    console.log(path);
                     if (hasChildrenCompoent) {
                         Component = path[1];
                     }
@@ -96,7 +89,11 @@ export function SecondaryRoutes() {
                         />
                     ) : (
                         // 展示二级路由部分
-                        <Route key={index} path={path[0]} element={<Component />} />
+                        <Route
+                            key={index}
+                            path={path[0]}
+                            element={<Element component={Component} />}
+                        />
                     );
                 })}
             </Routes>

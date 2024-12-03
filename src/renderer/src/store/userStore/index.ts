@@ -44,7 +44,7 @@ const useUserStore = create((set, get) => {
             index: 3,
             name: '教室查询',
             icon: '',
-            link: '/searchClassroom',
+            link: '/searchSpareClassroom',
             status: false
         },
         {

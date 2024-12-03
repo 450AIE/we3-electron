@@ -3,7 +3,6 @@ import styles from './index.module.scss';
 import useUserStore from '@renderer/store/userStore';
 import { Input } from 'antd';
 import { SearchOutlined, VideoCameraOutlined } from '@ant-design/icons';
-<SearchOutlined />;
 
 function LeftSiderbar() {
     // 在登录页不出现
