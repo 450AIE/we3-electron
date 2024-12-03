@@ -8,7 +8,7 @@ function DefaultRouterViewComponent() {
                 <div className="icon">
                     <JavaScriptOutlined />
                 </div>
-                <span className="text">JS提供支持</span>
+                <span className="text">蓝山工作室</span>
             </div>
         </div>
     );

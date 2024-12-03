@@ -12,6 +12,7 @@ import { extractRoutesWithChildren, routes } from '.';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import DefaultRouterViewComponent from './DefaultRouterViewComponent';
+import SearchBooksList from '@renderer/pages/searchBooks/searchBooksList';
 
 // 嵌套路由
 export function RouterView() {
@@ -50,12 +51,18 @@ function LoadingElement() {
     return <Spin indicator={<LoadingOutlined />} spin fullscreen delay={1500} />;
 }
 
+// 一级路由要保证都要展示
 export function FirstRouterView() {
+    const location = useLocation();
+    const { pathname } = location;
+    console.log(location);
     return (
         <Suspense fallback={<LoadingElement />}>
             <Routes>
                 {routes.map((route) => {
                     let { path } = route;
+                    // 将一级路由改为二级路由的path，保证有二级路由的时候用来展示数据
+                    path = pathname.startsWith(path) ? pathname : path;
                     return <Route key={path} path={path} element={<Element {...route} />}></Route>;
                 })}
             </Routes>
@@ -65,11 +72,22 @@ export function FirstRouterView() {
 
 export function SecondaryRoutes() {
     const allSecondaryRoutes = extractRoutesWithChildren(routes);
+    console.log(allSecondaryRoutes);
+    // allSecondaryRoutes.flat().map((path) => {
+    //     console.log(path);
+    //     path.includes('null') ? '' : console.log('无', path);
+    // });
     return (
         <Suspense fallback={<LoadingElement />}>
             <Routes>
-                {allSecondaryRoutes.flat().map((path, index) =>
-                    path.includes('null') ? (
+                {allSecondaryRoutes.map((path, index) => {
+                    let Component;
+                    const hasChildrenCompoent = Array.isArray(path);
+                    console.log(path);
+                    if (hasChildrenCompoent) {
+                        Component = path[1];
+                    }
+                    return !hasChildrenCompoent ? (
                         <Route
                             key={index}
                             // 这里保证和一级路由同时展示，并且显示默认组件
@@ -77,9 +95,10 @@ export function SecondaryRoutes() {
                             element={<DefaultRouterViewComponent />}
                         />
                     ) : (
-                        <Route key={index} path={path} />
-                    )
-                )}
+                        // 展示二级路由部分
+                        <Route key={index} path={path[0]} element={<Component />} />
+                    );
+                })}
             </Routes>
         </Suspense>
     );

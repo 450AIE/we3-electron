@@ -1,0 +1,93 @@
+.container {
+    position: relative;
+    height: auto;
+    min-height: 100%;
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    :global {
+        .search-top-logo {
+            height: 15vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                user-select: none;
+                -webkit-user-drag: none;
+                width: 50%;
+                height: 50%;
+            }
+        }
+        .search-inp-box {
+            margin-top: 1vh;
+            width: 100%;
+            .search-inp {
+                height: 5vh;
+                background-color: #f1f1f1;
+                border-radius: 20px;
+            }
+        }
+        .search-bottom-logo {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            height: 20vh;
+            img {
+                -webkit-user-drag: none;
+                user-select: none;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .one-item {
+            display: inline-block;
+            background-color: #f1f1f1;
+            padding: 1px 8px;
+            margin: 2px;
+            border-radius: 10px;
+            text-overflow: ellipsis;
+            max-width: 120px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .search-history,
+        .hot-search,
+        .search-rank {
+            margin-top: 20px;
+        }
+        .title-box {
+            padding: 0 2px;
+            margin-bottom: 4px;
+        }
+        .confirm-box {
+            background-color: green;
+            max-width: 70vw;
+            .confirm-box-content {
+                height: 10vh;
+                width: 100%;
+                font-size: 18px;
+                padding: 10px 5px 20px 5px;
+                // background-color: red;
+            }
+            .footer {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                .cancel-btn {
+                    flex-basis: 30%;
+                    border-radius: 20px;
+                    color: #fff;
+                    background-color: #ccc;
+                }
+                .confirm-btn {
+                    flex-basis: 30%;
+                    color: #fff;
+                    border-radius: 20px;
+                    background-color: #44cf7c;
+                }
+            }
+        }
+    }
+}

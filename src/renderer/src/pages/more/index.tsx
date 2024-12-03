@@ -30,11 +30,7 @@ function More() {
         }
         async function getTodayLessonData() {
             const res = await getTodayLessonDataAPI();
-            setTodayLessonData([
-                ...res.data.schedules,
-                ...res.data.schedules,
-                ...res.data.schedules
-            ]);
+            setTodayLessonData(res.data.schedules);
         }
         async function getJWZXMessageList() {
             const res = await getJWZXMessageListAPI();

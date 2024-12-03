@@ -52,11 +52,23 @@ export const routes = [
         path: '/electricityFeeInquery',
         name: 'electricityFeeInquery',
         component: lazy(() => import('@renderer/pages/electricityFeeInquiry'))
+    },
+    {
+        path: '/searchBooks',
+        name: 'searchBooks',
+        component: lazy(() => import('@renderer/pages/searchBooks')),
+        children: [
+            {
+                path: 'bookList/:name',
+                name: 'searchBooksList',
+                component: lazy(() => import('@renderer/pages/searchBooks/searchBooksList'))
+            }
+        ]
     }
 ];
 
 // 只存储所有二级路由的所有可能，如果没有二级路由的话，就存储为 ，
-// 有的话就是  '一级路由url+二级路由url '
+// 有的话就是  ['一级路由url+二级路由url ',child.component]
 export function extractRoutesWithChildren(routes) {
     const result = [];
     routes.forEach((route) => {
@@ -64,12 +76,13 @@ export function extractRoutesWithChildren(routes) {
         if (route.children) {
             route.children.forEach((child) => {
                 // 将父路由路径和子路由路径拼接起来
-                const fullPath = `${route.path}${child.path}`;
+                const fullPath = `${route.path}/${child.path}`;
                 routeWithChildren.push(fullPath);
+                routeWithChildren.push(child.component);
             });
             result.push(routeWithChildren);
         } else {
-            result.push([route.path + 'null']);
+            result.push(route.path + 'null');
         }
     });
     return result;

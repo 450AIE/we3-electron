@@ -26,11 +26,13 @@ function App() {
                     </Splitter.Panel>
                     <Splitter.Panel defaultSize="30%" min="10%" max="50%">
                         {/* 一级路由 */}
-                        <FirstRouterView />
+                        {/* <FirstRouterView /> */}
+                        <RouterView />
                     </Splitter.Panel>
                     <Splitter.Panel>
                         {/* 二级路由 */}
                         <SecondaryRoutes />
+                        {/* <RouterView /> */}
                     </Splitter.Panel>
                 </Splitter>
             </Fragment>
