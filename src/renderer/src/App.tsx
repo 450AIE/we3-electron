@@ -13,7 +13,7 @@ import TopPadding from './components/TopPadding';
 function App() {
     // 登录页不需要动态划分空间
     const location = useLocation();
-    if (location.pathname === '/login') return <RouterView />;
+    if (location.pathname === '/login' || location.pathname === '/my') return <RouterView />;
     return (
         <>
             <Fragment>

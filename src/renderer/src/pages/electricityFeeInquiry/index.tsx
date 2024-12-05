@@ -34,7 +34,7 @@ function ElectricityFeeInquiry() {
         feeInfo && (
             <div className={styles.container}>
                 <div className="top-card">
-                    <div className="dormitory">{feeInfo['room_id']}</div>
+                    <div className="dormitory">{feeInfo['room_id']}寝室</div>
                     <div className="top-detail-fee">
                         <div className="this-month-cost">
                             <div className="title">

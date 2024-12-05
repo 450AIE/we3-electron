@@ -7,6 +7,7 @@
     .beautify-scrollbar {
         &::-webkit-scrollbar {
             width: 8px; /* 滚动条宽度 */
+            height: 4px; //这个高度只对水平的滚动条起作用
             background-color: transparent; /* 滚动条轨道背景色 */
         }
         /* 对应scrollbar的拖动的那个滑块 */

@@ -12,6 +12,8 @@
             height: 26px;
             position: absolute;
             top: 50%;
+            -webkit-app-region: no-drag;
+            cursor: pointer;
             transform: translateY(-50%);
             left: 10px;
             background: #ccc;

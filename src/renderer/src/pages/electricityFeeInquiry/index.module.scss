@@ -14,21 +14,21 @@
             background: linear-gradient(40deg, #f9fdfa, #e6faed);
             .dormitory {
                 flex: 4;
-                background-color: gainsboro;
+                font-size: 30px;
             }
             .top-detail-fee {
                 flex: 6;
                 display: flex;
                 position: relative;
-                .this-month-costs {
+                .this-month-cost {
                     position: absolute;
-                    top: 0;
-                    left: 0;
+                    top: 10px;
+                    left: 30px;
                 }
                 .rest-money {
                     position: absolute;
-                    right: 0;
-                    top: 0;
+                    right: 30px;
+                    top: 10px;
                 }
                 .this-month-costs,
                 .rest-money {

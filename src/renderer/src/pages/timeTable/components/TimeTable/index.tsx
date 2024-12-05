@@ -16,6 +16,7 @@ function TimeTableContent() {
         utils: { getTheDateIsInWitchWeek, findOneLessonInfo }
     } = useTimeTableContext();
     const [isOpenLessonDetai, setIsOpenLessonDetail] = useState<boolean>(false);
+    // 当前查看的课表信息
     const [clickLessonInfo, setClickLessonInfo] = useState<LessonInfo | null>(null);
     // console.log('table渲染了', currentPage);
     function swiperToSetCurrentPage(current, next) {

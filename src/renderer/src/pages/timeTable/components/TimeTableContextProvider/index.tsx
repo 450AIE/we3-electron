@@ -17,6 +17,7 @@ function TimeTableContextProvider({ children }) {
     // 初始化
     const totalPages = 21;
     // 标记是否初始化成功（是否获取到了第一次的数据，无论是网络请求还是读缓存）
+    // 数据不同步怎么办？可以合并为一个状态set
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [term, setTerm] = useState<string>('');
     const [start_date, setStartDate] = useState<string>('');

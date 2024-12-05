@@ -14,10 +14,10 @@
         .banner {
             flex: 2;
             width: 100%;
-            height: 20vh;
+            height: 24vh;
             margin: 10px 0;
             .one-banner-img-box {
-                height: 20vh;
+                height: 24vh;
                 width: 100%;
                 .one-banner-img {
                     height: 100%;
@@ -27,30 +27,93 @@
         }
         .options-box {
             flex: 2;
+            // .one-page-option-box {
+            //     width: 100%;
+            //     height: 30vh;
+            //     padding: 5px;
+            //     display: grid !important;
+            //     grid-template-columns: repeat(4, 1fr);
+            //     grid-row: repeat(2, 1fr);
+            //     grid-template-areas:
+            //         '. . . .'
+            //         '. . . .';
+            //     row-gap: 20px;
+            //     column-gap: 20px;
+            //     background-color: lightcoral;
+            //     .one-option {
+            //         display: flex;
+            //         flex-direction: column;
+            //         display: flex;
+            //         justify-content: center;
+            //         align-items: center;
+            //         background-color: lightblue;
+            //         border-radius: 6px;
+            //         .one-option-icon {
+            //             flex: 2;
+            //             width: 80%;
+            //             height: 80%;
+            //         }
+            //         .one-option-name {
+            //             display: flex;
+            //             flex: 1;
+            //             align-items: center;
+            //             justify-content: center;
+            //             white-space: nowrap;
+            //             text-overflow: ellipsis;
+            //             overflow: hidden;
+            //         }
+            //     }
+            // }
             .one-page-option-box {
                 width: 100%;
                 height: 24vh;
-                padding: 5px;
-                display: grid !important;
-                grid-template-columns: repeat(4, 1fr);
-                grid-row: repeat(2, 1fr);
-                grid-template-areas:
-                    '. . . .'
-                    '. . . .';
-                row-gap: 30px;
-                column-gap: 30px;
-                background-color: lightcoral;
+                padding: 10px;
+                user-select: none;
                 .one-option {
-                    display: flex;
-                    flex-direction: column;
-                    background-color: lightblue;
-                    border-radius: 6px;
+                    position: relative;
+                    display: inline-block;
+                    width: 25%;
+                    height: 40%;
+                    margin-bottom: 6%;
                     .one-option-icon {
-                        flex: 2;
+                        position: relative;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        img {
+                            width: 60%;
+                            height: 60%;
+                        }
+                        .btn {
+                            position: absolute;
+                            top: -10%;
+                            right: 15%;
+                            height: 25%;
+                            width: 25%;
+                            border-radius: 10px;
+                            font-size: 20px;
+                            &.cancel-select {
+                                color: #f2a498;
+                                background-color: #f4e4e1;
+                            }
+                            &.confirm-select {
+                                color: #2cabff;
+                                background-color: #e5f5ff;
+                            }
+                            .icon {
+                                display: inline-block;
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                font-size: 18px;
+                            }
+                        }
                     }
                     .one-option-name {
+                        cursor: pointer;
                         display: flex;
-                        flex: 1;
                         align-items: center;
                         justify-content: center;
                     }

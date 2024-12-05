@@ -1,6 +1,6 @@
 import { Button, Form, Input, Modal } from 'antd';
 import styles from './index.module.scss';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { getRepairAreaAPI, getServiceTypeAPI } from '@renderer/apis/repaireReport';
 import { RepaireArea, RepaireType } from './types';
 import PickerModal from '@renderer/components/PickerModal';
@@ -20,11 +20,11 @@ function ReportRepaire() {
     const [openedPickerModalId, setOpenedPickerModalId] = useState<number>(0);
     useEffect(() => {
         getServiceTypeAPI().then((res) => {
-            console.log('repaireTypes', res);
+            // console.log('repaireTypes', res);
             setServiceTypeArr(res.data.service_types);
         });
         getRepairAreaAPI().then((res) => {
-            console.log('repaireAreas', res);
+            // console.log('repaireAreas', res);
             setRepaireAreaArr(res.data.areas);
         });
     }, []);
@@ -46,7 +46,7 @@ function ReportRepaire() {
     }
     return (
         <div className={styles.container}>
-            <Form onFinish={submitRepaire} form={form} labelCol={{ span: 5 }}>
+            <Form onFinish={submitRepaire} form={form} labelCol={{ span: 5 }} labelWrap>
                 <Form.Item name="service_type_id" style={{ display: 'none' }}>
                     <Input />
                 </Form.Item>

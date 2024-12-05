@@ -15,7 +15,7 @@ export function getBookDetailAPI(id) {
         headers: {
             traefik: 'jwzx'
         },
-        data: {
+        params: {
             id
         }
     });
@@ -36,7 +36,7 @@ export function getSearchBookListAPI(name, pages, limit? = 20) {
         headers: {
             traefik: 'jwzx'
         },
-        data: {
+        params: {
             name,
             page: pages
         }

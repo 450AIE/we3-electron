@@ -1,0 +1,18 @@
+.container {
+    // -webkit-app-region: drag;
+    width: 100vw;
+    height: 100vh;
+    padding: 10px;
+    background-color: lightcoral;
+    :global {
+        .top-card {
+            margin-top: 20px;
+            height: 30vh;
+            width: 100%;
+            border-radius: 10px;
+            background-color: red;
+            background: url('@/renderer/src/assets/MY/avatar_card_light.jpg');
+            background-size: 100% 140%;
+        }
+    }
+}

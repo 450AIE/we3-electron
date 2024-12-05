@@ -1,0 +1,32 @@
+.container {
+    user-select: none;
+    pointer-events: none;
+    padding: 10px;
+    :global {
+        .book-name {
+            font-size: 20px;
+        }
+        .book-author {
+            font-size: 16px;
+        }
+        .book-isbn {
+            font-size: 16px;
+        }
+        .book-introduce {
+            margin: 10px 0;
+            color: #828080;
+            div:first-child {
+                font-size: 16px;
+                border-bottom: 1px solid #ccc;
+            }
+            .book-introduce-content {
+                margin-top: 10px;
+            }
+        }
+        .book-num {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+}

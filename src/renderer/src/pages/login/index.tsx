@@ -9,15 +9,15 @@ import { LOGIN_WINDOW, MAIN_WINDOW } from '@renderer/utils/windowTypes';
 import useUserStore from '@renderer/store/userStore';
 import useUpdateStateSync from '@renderer/hooks/useUpdateStateSync';
 import AppOperation from '@renderer/components/AppOperation';
+import useListenNewWindowCreated from '@renderer/hooks/useListenNewWindowCreated';
 
 export function Login() {
-    useUpdateStateSync();
-    //
+    useListenNewWindowCreated();
     const { userInfo, setUserInfo } = useUserStore();
     // 隐私政策
     const [checkPrivity, setCheckPrivity] = useState<Boolean>(true);
     // 帮助弹窗
-    const [modal, setModalOpen] = useState(false);
+    const [modal, setModalOpen] = useState<boolean>(false);
     // 统一认证码的值
     const [account, setAccount] = useState<string>('1686965');
     // 密码的值
@@ -63,9 +63,9 @@ export function Login() {
                 setUserInfo(res.data.user_info);
                 // console.log(userInfo);
                 if (res.msg === '登录成功') {
-                    // 开辟新窗口，销毁登陆页的窗口
+                    // 开辟新窗口，开辟完毕，同步数据后再销毁登陆页的窗口
                     IPC.createWindow(MAIN_WINDOW);
-                    IPC.destroyWindow(LOGIN_WINDOW);
+                    // IPC.destroyWindow(LOGIN_WINDOW);
                 }
             } catch (error) {
                 console.warn(error);

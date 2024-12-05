@@ -10,7 +10,7 @@ export const routes = [
     {
         path: '/my',
         name: 'my',
-        component: null
+        component: lazy(() => import('@renderer/pages/my'))
     },
     // 独立窗口
     {
@@ -27,10 +27,6 @@ export const routes = [
         path: '/calender',
         name: 'calender',
         component: lazy(() => import('@renderer/pages/calender'))
-    },
-    {
-        path: '/home',
-        component: null
     },
     // 这个setting页面要新开一个窗口展示
     {
@@ -69,6 +65,18 @@ export const routes = [
         path: '/searchSpareClassroom',
         name: 'searchSpareClassroom',
         component: lazy(() => import('@renderer/pages/searchSpareClassroom'))
+    },
+    {
+        path: '/schoolMessage',
+        name: 'schoolMessage',
+        component: lazy(() => import('@renderer/pages/schoolMessage')),
+        children: [
+            {
+                path: '/schoolMessage/message/:id',
+                name: 'message',
+                component: lazy(() => import('@renderer/pages/schoolMessage/schoolMessageDetail'))
+            }
+        ]
     }
 ];
 

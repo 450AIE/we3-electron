@@ -1,24 +1,38 @@
 import { getTodayDate } from '@renderer/utils/date';
 import styles from './index.module.scss';
 import { Carousel, Tabs } from 'antd';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { getBannerAPI, getJWZXMessageListAPI, getTodayLessonDataAPI } from '@renderer/apis/more';
 import useUserStore from '@renderer/store/userStore';
 import TodayLessonCard from './components/TodayLessonCard';
+import { group } from 'console';
+import { cloneDeep } from 'lodash';
+import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 
 // num表示切分标准为几个为一组
 function splitArrayByNum(arr, num) {
     const result = [];
+    let processedIndices = new Set();
     for (let i = 0; i < arr.length; i += num) {
-        const group = arr.slice(i, i + num);
+        const group = [];
+        let currentIndex = i;
+        let count = 0;
+        while (count < num && currentIndex < arr.length) {
+            if (!processedIndices.has(currentIndex) && arr[currentIndex].name !== '更多') {
+                group.push(arr[currentIndex]);
+                processedIndices.add(currentIndex);
+                count++;
+            }
+            currentIndex++;
+        }
         result.push(group);
     }
-    return result;
+    return result.filter((arr) => arr.length > 0);
 }
 
 function More() {
     const date = getTodayDate();
-    const { leftSiderbarOptionsArr } = useUserStore();
+    const { leftSiderbarOptionsArr, setLeftSiderbarOptionsArr } = useUserStore();
     const sliceOptionsArr = splitArrayByNum(leftSiderbarOptionsArr, 8);
     const [bannerImgArr, setBannerImgArr] = useState([]);
     const [todayLessonData, setTodayLessonData] = useState([]);
@@ -61,6 +75,18 @@ function More() {
             children: null
         }
     ];
+    function optionsClickFunc(e, option) {
+        let dom = e.target;
+        const newOption = {
+            ...option,
+            status: !option.status
+        };
+        const index = leftSiderbarOptionsArr.findIndex((options) => options.name === option.name);
+        const newLeftSiderbarOptionsArr = cloneDeep(leftSiderbarOptionsArr);
+        newLeftSiderbarOptionsArr[index] = newOption;
+        console.log('old:', leftSiderbarOptionsArr, 'new:', newLeftSiderbarOptionsArr);
+        setLeftSiderbarOptionsArr(newLeftSiderbarOptionsArr);
+    }
     return (
         <div className={styles.container}>
             <div className="today">
@@ -89,8 +115,23 @@ function More() {
                     {sliceOptionsArr.map((optionArr, idx) => (
                         <ul key={idx} className="one-page-option-box">
                             {optionArr.map((option) => (
-                                <li key={option.name} className="one-option">
-                                    <img src="" alt="" className="one-option-icon" />
+                                <li
+                                    key={option.name}
+                                    className="one-option"
+                                    onClick={(e) => optionsClickFunc(e, option)}
+                                >
+                                    <div className="one-option-icon">
+                                        {option.status ? (
+                                            <div className="btn cancel-select">
+                                                <PlusOutlined className="icon" />
+                                            </div>
+                                        ) : (
+                                            <div className="btn confirm-select">
+                                                <MinusOutlined className="icon" />
+                                            </div>
+                                        )}
+                                        <img src={option.imgUrl} alt="" />
+                                    </div>
                                     <span className="one-option-name">{option.name}</span>
                                 </li>
                             ))}
