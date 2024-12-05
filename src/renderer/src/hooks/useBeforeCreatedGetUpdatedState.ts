@@ -6,8 +6,8 @@ function useBeforeCreatedGetUpdatedState(createdWindowName: string) {
     // 这个确实只会被触发一次
     useEffect(() => {
         IPC.notifyAllWindowNewWindowCreated(createdWindowName);
-        IPC.onListenerCreatedWindowToUpdateState((_, jsonStore) =>
-            updateState(jsonStore, userStore)
+        IPC.onListenerCreatedWindowToUpdateState((_, jsonStore) => 
+            updateState(jsonStore, userStore);
         );
         // 注意这个也要移除
         return () => {

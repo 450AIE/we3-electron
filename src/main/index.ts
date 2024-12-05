@@ -260,6 +260,7 @@ ipcMain.on(
     'renderer-send-main-to-send-updated-state-to-new-created-window',
     (_, createdWindowName, jsonStore) => {
         const win = findWindow(createdWindowName);
+        console.log('向', win?.windowName, '发送');
         win?.window.webContents.send('main-send-updated-state-to-new-created-window', jsonStore);
     }
 );
