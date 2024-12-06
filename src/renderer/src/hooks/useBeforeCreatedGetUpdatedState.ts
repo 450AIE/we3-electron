@@ -6,18 +6,18 @@ function useBeforeCreatedGetUpdatedState(createdWindowName: string) {
     // 这个确实只会被触发一次
     useEffect(() => {
         IPC.notifyAllWindowNewWindowCreated(createdWindowName);
-        IPC.onListenerCreatedWindowToUpdateState((_, jsonStore) => 
-            updateState(jsonStore, userStore);
+        IPC.onListenerCreatedWindowToUpdateState((_, jsonStore) =>
+            updateState(jsonStore, userStore)
         );
         // 注意这个也要移除
         return () => {
-            IPC.removeListenerToUpdateState();
+            IPC.removeListenerCreatedWindowToUpdateState();
         };
     }, []);
 }
 
 function updateState(jsonStore, userStore) {
-    console.log('收到的', JSON.parse(jsonStore));
+    console.log('新创建窗口收到的zustand状态:', JSON.parse(jsonStore));
     const store = JSON.parse(jsonStore);
     for (let key in userStore) {
         if (userStore.hasOwnProperty(key)) {

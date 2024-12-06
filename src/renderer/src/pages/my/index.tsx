@@ -29,7 +29,7 @@ function My() {
     useUpdateStateSync();
     useBeforeCreatedGetUpdatedState(MY_WINDOW);
     const userStore = useUserStore();
-    console.log(userStore);
+    console.log('userStore', userStore);
     const [state, setState] = useState(0);
     return (
         <div className={styles.container}>

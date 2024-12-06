@@ -258,9 +258,9 @@ ipcMain.on('notify-all-window-new-window-created', (_, createdWindowName: string
 // 监听来自窗口转发给新创建窗口的zustand的状态信息，实现转发给新创建的窗口
 ipcMain.on(
     'renderer-send-main-to-send-updated-state-to-new-created-window',
-    (_, createdWindowName, jsonStore) => {
+    (e, createdWindowName, jsonStore) => {
         const win = findWindow(createdWindowName);
-        console.log('向', win?.windowName, '发送');
+        console.log(e.processId, '向', win?.windowName, '发送');
         win?.window.webContents.send('main-send-updated-state-to-new-created-window', jsonStore);
     }
 );

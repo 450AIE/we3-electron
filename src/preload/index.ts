@@ -27,7 +27,7 @@ contextBridge.exposeInMainWorld('IPC', {
         ipcRenderer.removeAllListeners('notify-all-window-update-state-from-main-process'),
     removeListenerNewWindowCreated: () => ipcRenderer.removeAllListeners('new-window-created'),
     // 清除监听新窗口对zustand仓库传递的监听
-    removeListenerToUpdateState: () =>
+    removeListenerCreatedWindowToUpdateState: () =>
         ipcRenderer.removeAllListeners('main-send-updated-state-to-new-created-window'),
     minimize: () => ipcRenderer.send('minimize'),
     maximize: () => ipcRenderer.send('maximize'),
