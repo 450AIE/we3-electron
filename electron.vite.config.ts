@@ -4,9 +4,21 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
     main: {
+        resolve: {
+            alias: {
+                '@shared': resolve('src/shared/'),
+                '@': resolve('src')
+            }
+        },
         plugins: [externalizeDepsPlugin()]
     },
     preload: {
+        resolve: {
+            alias: {
+                '@shared': resolve('src/shared/'),
+                '@': resolve('src')
+            }
+        },
         plugins: [externalizeDepsPlugin()]
     },
     renderer: {
@@ -15,9 +27,19 @@ export default defineConfig({
                 '@renderer': resolve('src/renderer/src'),
                 '@utils': resolve('src/renderer/src/utils'),
                 '@assets': resolve('src/renderer/src/assets/'),
+                '@shared': resolve('src/shared/'),
                 '@': resolve('src')
             }
         },
         plugins: [react()]
+    },
+    shared: {
+        resolve: {
+            alias: {
+                '@shared': resolve('src/shared/'),
+                '@': resolve('src')
+            }
+        },
+        plugins: [externalizeDepsPlugin()]
     }
 });

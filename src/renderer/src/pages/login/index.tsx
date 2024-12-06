@@ -5,7 +5,7 @@ import { Button, Input, message } from 'antd';
 import styles from './index.module.scss';
 import LoginInput from './Input';
 import { QuestionCircleOutlined } from '@ant-design/icons';
-import { LOGIN_WINDOW, MAIN_WINDOW } from '@renderer/utils/windowTypes';
+import { LOGIN_WINDOW, MAIN_WINDOW } from '@shared/types/windows';
 import useUserStore from '@renderer/store/userStore';
 import useUpdateStateSync from '@renderer/hooks/useUpdateStateSync';
 import AppOperation from '@renderer/components/AppOperation';

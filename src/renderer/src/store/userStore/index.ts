@@ -15,6 +15,7 @@ import SearchBooks from '@/renderer/src/assets/home/booksearch.png';
 import SearchTimeTable from '@/renderer/src/assets/home/searchTimeTable.png';
 
 const useUserStore = create((set, get) => {
+    const storeName = 'userStore';
     const userInfo: UserInfo = {};
     const dateInfo: DateInfo = {};
     function setUserInfo(newUserInfo) {
@@ -131,6 +132,7 @@ const useUserStore = create((set, get) => {
     }
     getDateInfo();
     return {
+        storeName,
         userInfo,
         setUserInfo,
         leftSiderbarOptionsArr,
@@ -138,4 +140,5 @@ const useUserStore = create((set, get) => {
         dateInfo
     };
 });
+
 export default useUserStore;

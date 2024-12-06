@@ -1,7 +1,7 @@
 import { UserOutlined } from '@ant-design/icons';
 import AppOperation from '../AppOperation';
 import styles from './index.module.scss';
-import { MY_WINDOW } from '@renderer/utils/windowTypes';
+import { MY_WINDOW } from '@shared/types/windows';
 
 function TopPadding() {
     function openMyPage() {

@@ -3,7 +3,7 @@ import { join } from 'path';
 import { electronApp, optimizer, is } from '@electron-toolkit/utils';
 import icon from '../../resources/icon.png?asset';
 import request from '../renderer/src/utils/http';
-import { LOGIN_WINDOW, MAIN_WINDOW, MY_WINDOW, WeCQUPT_Window } from './types';
+import { LOGIN_WINDOW, MAIN_WINDOW, MY_WINDOW, WeCQUPT_Window } from '@shared/types/windows';
 // 维护window栈
 let windowStack: WeCQUPT_Window[] = [];
 function pushWindow(name, win) {
