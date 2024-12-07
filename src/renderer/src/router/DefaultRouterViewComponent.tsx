@@ -5,7 +5,7 @@ function DefaultRouterViewComponent() {
     return (
         <div className={styles.container}>
             <div className="icon-box">
-                <div className="icon">
+                <div className="js-icon">
                     <JavaScriptOutlined />
                 </div>
                 <span className="text">蓝山工作室</span>

@@ -4,6 +4,7 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils';
 import icon from '../../resources/icon.png?asset';
 import request from '../renderer/src/utils/http';
 import { LOGIN_WINDOW, MAIN_WINDOW, MY_WINDOW, WeCQUPT_Window } from '@shared/types/windows';
+import { USER_DETAIL_WINDOW } from '../shared/types/windows';
 // 维护window栈
 let windowStack: WeCQUPT_Window[] = [];
 function pushWindow(name, win) {
@@ -31,6 +32,10 @@ function createWindow(windowName) {
             break;
         case MY_WINDOW:
             createMyWindow();
+            break;
+        case USER_DETAIL_WINDOW:
+            createUserDetailWindow();
+            break;
         default:
             break;
     }
@@ -38,11 +43,10 @@ function createWindow(windowName) {
 
 function createMyWindow() {
     const win = new BrowserWindow({
-        width: 600,
+        width: 450,
         height: 700,
         show: false,
-        minHeight: 500,
-        minWidth: 600,
+        resizable: false,
         frame: false,
         alwaysOnTop: true,
         autoHideMenuBar: true,
@@ -72,11 +76,11 @@ function createMyWindow() {
 // 这个要做尺寸的缓存
 function createMainWindow(): void {
     const win = new BrowserWindow({
-        width: 600,
+        width: 700,
         height: 700,
         show: false,
-        minHeight: 500,
-        minWidth: 600,
+        minHeight: 700,
+        minWidth: 700,
         frame: false,
         alwaysOnTop: true,
         autoHideMenuBar: true,
@@ -145,6 +149,45 @@ function createLoginWindow(): void {
         loginWindow.loadURL(process.env['ELECTRON_RENDERER_URL'] + '/#/login');
     } else {
         loginWindow.loadFile(join(__dirname, '../renderer/index.html'), { hash: 'login' });
+    }
+}
+
+function createUserDetailWindow(): void {
+    // Create the browser window.
+    const win = new BrowserWindow({
+        width: 500,
+        height: 700,
+        show: false,
+        resizable: false,
+        alwaysOnTop: true,
+        frame: false,
+        autoHideMenuBar: true,
+        ...(process.platform === 'linux' ? { icon } : {}),
+        webPreferences: {
+            preload: join(__dirname, '../preload/index.js'),
+            sandbox: false,
+            webSecurity: false
+        }
+    });
+
+    win.on('ready-to-show', () => {
+        pushWindow(USER_DETAIL_WINDOW, win);
+        win.show();
+    });
+
+    win.webContents.setWindowOpenHandler((details) => {
+        shell.openExternal(details.url);
+        return { action: 'deny' };
+    });
+    win.on('closed', () => {
+        popWindow(USER_DETAIL_WINDOW);
+    });
+    // HMR for renderer base on electron-vite cli.
+    // Load the remote URL for development or the local html file for production.
+    if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
+        win.loadURL(process.env['ELECTRON_RENDERER_URL'] + '/#/userDetail');
+    } else {
+        win.loadFile(join(__dirname, '../renderer/index.html'), { hash: 'userDetail' });
     }
 }
 
@@ -260,3 +303,9 @@ ipcMain.on(
         win?.window.webContents.send('main-send-updated-state-to-new-created-window', update);
     }
 );
+
+ipcMain.on('destroy-all-windows', () => {
+    for (let cquptWindow of windowStack) {
+        cquptWindow.window.destroy();
+    }
+});

@@ -7,11 +7,9 @@ function useBeforeCreatedGetUpdatedState(createdWindowName: string) {
     // 这个确实只会被触发一次
     useEffect(() => {
         IPC.notifyAllWindowNewWindowCreated(createdWindowName);
-        IPC.onListenerCreatedWindowToUpdateState((_, update) => updateState(update, userStore));
-        // 注意这个也要移除
-        return () => {
-            IPC.removeListenerCreatedWindowToUpdateState();
-        };
+        // 只接收一次就可以了，不过可能会接受到旧窗口的旧数据，不过每个窗口之间会同步,
+        // 概率还是比较低
+        IPC.onceListenerCreatedWindowToUpdateState((_, update) => updateState(update, userStore));
     }, []);
 }
 
@@ -32,6 +30,7 @@ function updateState(update, userStore) {
                 // 根据时间判断是否更新
                 console.log('字段', filedName, '收到的最后更新时间', receiveLatestUpdateTime);
                 if (isCanUpdate(filedName, receiveLatestUpdateTime)) {
+                    console.log('进来');
                     userStore[key](store[filedName], receiveLatestUpdateTime);
                 }
             }

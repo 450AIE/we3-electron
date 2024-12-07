@@ -13,7 +13,12 @@ import TopPadding from './components/TopPadding';
 function App() {
     // 登录页不需要动态划分空间
     const location = useLocation();
-    if (location.pathname === '/login' || location.pathname === '/my') return <RouterView />;
+    if (
+        location.pathname === '/login' ||
+        location.pathname === '/my' ||
+        location.pathname === '/userDetail'
+    )
+        return <RouterView />;
     return (
         <>
             <Fragment>
@@ -24,7 +29,7 @@ function App() {
                     <Splitter.Panel defaultSize="20%" min="10%" max="30%">
                         <LeftSiderbar />
                     </Splitter.Panel>
-                    <Splitter.Panel defaultSize="30%" min="10%" max="50%">
+                    <Splitter.Panel defaultSize="50%" min="10%" max="50%">
                         {/* 一级路由 */}
                         {/* <FirstRouterView /> */}
                         <RouterView />

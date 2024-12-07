@@ -123,11 +123,11 @@ function More() {
                                     <div className="one-option-icon">
                                         {option.status ? (
                                             <div className="btn cancel-select">
-                                                <PlusOutlined className="icon" />
+                                                <PlusOutlined className="one-icon" />
                                             </div>
                                         ) : (
                                             <div className="btn confirm-select">
-                                                <MinusOutlined className="icon" />
+                                                <MinusOutlined className="one-icon" />
                                             </div>
                                         )}
                                         <img src={option.imgUrl} alt="" />

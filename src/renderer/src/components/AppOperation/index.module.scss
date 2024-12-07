@@ -8,7 +8,7 @@
     height: 30px;
     -webkit-app-region: no-drag;
     :global {
-        .icon {
+        .app-icon {
             width: 100%;
             height: 100%;
             display: flex;
@@ -18,11 +18,11 @@
             font-size: 14px;
             color: #929292;
         }
-        .icon:hover {
+        .app-icon:hover {
             background-color: #ccc;
             color: #000000;
         }
-        .icon:last-child:hover {
+        .app-icon:last-child:hover {
             color: #fff;
             background-color: #c42b1c;
         }

@@ -8,7 +8,7 @@ const AppOperation = memo(() => {
         // console.log(e.target);
         let dom = e.target;
         let parent = dom;
-        while (![...dom.classList].includes('icon')) {
+        while (![...dom.classList].includes('app-icon')) {
             parent = parent.parentNode;
             dom = parent;
         }
@@ -30,7 +30,7 @@ const AppOperation = memo(() => {
     return (
         <ul className={styles.container} onClick={appOperate}>
             {iconList.map((item, idx) => (
-                <li className="icon" data-id={idx}>
+                <li className="app-icon" data-id={idx}>
                     {item}
                 </li>
             ))}

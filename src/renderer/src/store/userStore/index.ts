@@ -42,7 +42,7 @@ const useUserStore = create((set, get) => {
             icon: '',
             imgUrl: SearchTimeTable,
             link: '/timeTable',
-            status: false
+            status: true
         },
         {
             index: 1,

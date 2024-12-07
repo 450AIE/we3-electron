@@ -14,8 +14,8 @@ contextBridge.exposeInMainWorld('IPC', {
     notifyAllWindowNewWindowCreated: (createdWindowName) =>
         ipcRenderer.send('notify-all-window-new-window-created', createdWindowName),
     // 新创建的窗口监听接收传来的仓库信息
-    onListenerCreatedWindowToUpdateState: (cb) =>
-        ipcRenderer.on('main-send-updated-state-to-new-created-window', cb),
+    onceListenerCreatedWindowToUpdateState: (cb) =>
+        ipcRenderer.once('main-send-updated-state-to-new-created-window', cb),
     // 监听新窗口的创建
     onListenerNewWindowCreated: (cb) => ipcRenderer.on('new-window-created', cb),
     sendToMainZustandStoreJSON: (createdWindowName, update) =>
@@ -28,18 +28,11 @@ contextBridge.exposeInMainWorld('IPC', {
     removeListenerToUpdateState: () =>
         ipcRenderer.removeAllListeners('notify-all-window-update-state-from-main-process'),
     removeListenerNewWindowCreated: () => ipcRenderer.removeAllListeners('new-window-created'),
+    destroyAllWindows: () => ipcRenderer.send('destroy-all-windows'),
     // 清除监听新窗口对zustand仓库传递的监听
-    removeListenerCreatedWindowToUpdateState: () =>
-        ipcRenderer.removeAllListeners('main-send-updated-state-to-new-created-window'),
+    // removeListenerCreatedWindowToUpdateState: () =>
+    //     ipcRenderer.removeAllListeners('main-send-updated-state-to-new-created-window'),
     minimize: () => ipcRenderer.send('minimize'),
     maximize: () => ipcRenderer.send('maximize'),
     closeWindow: () => ipcRenderer.send('closeWindow')
-    // isNewCreatedWindow表示是否是新创建的窗口，是的话时间戳就不是全为0了,
-    // 而是旧窗口的发送时间
-    // initializeUpdateMap: (store: any, isNewCreatedWindow?: boolean = false) => {
-    //     const time = isNewCreatedWindow ? Date.now() : 0;
-    //     // 遍历初始化该store的所有字段，默认时间戳都为0
-    //     traverseInitializeUpdateMap(store, updateMap, time);
-    //     // console.log('updateMap', updateMap);
-    // }
 });

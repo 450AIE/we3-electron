@@ -3,11 +3,11 @@ import { traverseInitializeUpdateMap } from '@shared/utils/update';
 import { useEffect } from 'react';
 
 // 将该store加入updateMap
-function useInitialStoreInUpdateMap(store, isNewCreatedWindow? = false) {
+function useInitialStoreInUpdateMap() {
+    const userStore = useUserStore();
     useEffect(() => {
-        const time = isNewCreatedWindow ? Date.now() : 0;
         // 遍历初始化该store的所有字段，默认时间戳都为0
-        traverseInitializeUpdateMap(store, time);
+        traverseInitializeUpdateMap(userStore, 0);
     }, []);
 
     // console.log('updateMap', updateMap);

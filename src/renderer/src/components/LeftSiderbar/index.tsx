@@ -16,7 +16,7 @@ function LeftSiderbar() {
     const navigate = useNavigate();
     if (location.pathname === '/login') return;
     const userStore = useUserStore();
-    useInitialStoreInUpdateMap(userStore);
+    useInitialStoreInUpdateMap();
     // 做这个几乎一直存在，监听
     useBeforeCreatedGetUpdatedState(MAIN_WINDOW);
     useListenNewWindowCreated();
@@ -32,9 +32,9 @@ function LeftSiderbar() {
         // userInfo为{}的时候就不执行，避免一函数组件初次渲染
         // 时执行该useEffect关闭窗口，但是还未传递zustand状态，
         // 监听userInfo，同步了状态就关闭登录页
-        // if (userInfo?.name) {
-        //     IPC.destroyWindow(LOGIN_WINDOW);
-        // }
+        if (userInfo?.name) {
+            IPC.destroyWindow(LOGIN_WINDOW);
+        }
     }, [userInfo]);
     return (
         <div className={styles.container}>

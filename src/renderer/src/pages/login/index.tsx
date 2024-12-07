@@ -17,7 +17,7 @@ export function Login() {
     useListenNewWindowCreated();
     const userStore = useUserStore();
     const { userInfo, setUserInfo } = userStore;
-    useInitialStoreInUpdateMap(userStore);
+    useInitialStoreInUpdateMap();
     // 隐私政策
     const [checkPrivity, setCheckPrivity] = useState<Boolean>(true);
     // 帮助弹窗
