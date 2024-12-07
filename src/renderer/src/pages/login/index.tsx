@@ -10,10 +10,14 @@ import useUserStore from '@renderer/store/userStore';
 import useUpdateStateSync from '@renderer/hooks/useUpdateStateSync';
 import AppOperation from '@renderer/components/AppOperation';
 import useListenNewWindowCreated from '@renderer/hooks/useListenNewWindowCreated';
+import useInitialStoreInUpdateMap from '@renderer/hooks/useInitialStoreInUpdateMap';
 
 export function Login() {
+    useUpdateStateSync();
     useListenNewWindowCreated();
-    const { userInfo, setUserInfo } = useUserStore();
+    const userStore = useUserStore();
+    const { userInfo, setUserInfo } = userStore;
+    useInitialStoreInUpdateMap(userStore);
     // 隐私政策
     const [checkPrivity, setCheckPrivity] = useState<Boolean>(true);
     // 帮助弹窗
@@ -61,7 +65,6 @@ export function Login() {
             try {
                 const res = await loginAPI(account, password, vertification);
                 setUserInfo(res.data.user_info);
-                // console.log(userInfo);
                 if (res.msg === '登录成功') {
                     // 开辟新窗口，开辟完毕，同步数据后再销毁登陆页的窗口
                     IPC.createWindow(MAIN_WINDOW);

@@ -22,8 +22,8 @@ function LeftSiderbar() {
     useListenNewWindowCreated();
     useUpdateStateSync();
     const { leftSiderbarOptionsArr, setLeftSiderbarOptionsArr, userInfo } = userStore;
-    console.log(leftSiderbarOptionsArr);
-    console.log('userStore', userStore);
+    // console.log(leftSiderbarOptionsArr);
+    // console.log('userStore', userStore);
     function navigateTo(e) {
         const { link } = e.target.dataset;
         navigate(link);
@@ -32,9 +32,9 @@ function LeftSiderbar() {
         // userInfo为{}的时候就不执行，避免一函数组件初次渲染
         // 时执行该useEffect关闭窗口，但是还未传递zustand状态，
         // 监听userInfo，同步了状态就关闭登录页
-        if (userInfo?.name) {
-            IPC.destroyWindow(LOGIN_WINDOW);
-        }
+        // if (userInfo?.name) {
+        //     IPC.destroyWindow(LOGIN_WINDOW);
+        // }
     }, [userInfo]);
     return (
         <div className={styles.container}>

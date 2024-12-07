@@ -13,7 +13,7 @@ export function useTimeTableContext() {
 }
 
 function TimeTableContextProvider({ children }) {
-    console.log('context又被执行了');
+    // console.log('context又被执行了');
     // 初始化
     const totalPages = 21;
     // 标记是否初始化成功（是否获取到了第一次的数据，无论是网络请求还是读缓存）
@@ -103,7 +103,7 @@ function TimeTableContextProvider({ children }) {
         // 缓存的数据的期限是多少，我们先实现带有效期的缓存吧
         if (res) {
             const lessonArr = unionWith(lessonsInfo, res.data.schedules, isEqual);
-            console.log('原来：', lessonsInfo, '现在:', lessonArr);
+            // console.log('原来：', lessonsInfo, '现在:', lessonArr);
             if (backWeekNum === 0 && advanceWeekNum === 0) {
                 setLessonDataCache(weekNum, lessonArr);
             } else {

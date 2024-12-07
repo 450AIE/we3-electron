@@ -5,7 +5,7 @@ import styles from './index.module.scss';
 const AppOperation = memo(() => {
     const iconList = [<MinusOutlined />, <BorderOutlined />, <CloseOutlined />];
     function appOperate(e) {
-        console.log(e.target);
+        // console.log(e.target);
         let dom = e.target;
         let parent = dom;
         while (![...dom.classList].includes('icon')) {

@@ -84,7 +84,7 @@ function More() {
         const index = leftSiderbarOptionsArr.findIndex((options) => options.name === option.name);
         const newLeftSiderbarOptionsArr = cloneDeep(leftSiderbarOptionsArr);
         newLeftSiderbarOptionsArr[index] = newOption;
-        console.log('old:', leftSiderbarOptionsArr, 'new:', newLeftSiderbarOptionsArr);
+        // console.log('old:', leftSiderbarOptionsArr, 'new:', newLeftSiderbarOptionsArr);
         setLeftSiderbarOptionsArr(newLeftSiderbarOptionsArr);
     }
     return (

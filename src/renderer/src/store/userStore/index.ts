@@ -18,7 +18,9 @@ const useUserStore = create((set, get) => {
     const storeName = 'userStore';
     const userInfo: UserInfo = {};
     const dateInfo: DateInfo = {};
-    function setUserInfo(newUserInfo) {
+    // 这个time可能是自己仓库触发更新，然后打上时间戳，也可能是
+    // 接收的其他仓库的time，用来更新自己的time
+    function setUserInfo(newUserInfo, time? = Date.now()) {
         console.log(newUserInfo, get().userInfo);
         if (isEqual(newUserInfo, get().userInfo)) return true;
         set((state) => ({
@@ -27,7 +29,9 @@ const useUserStore = create((set, get) => {
                 ...newUserInfo
             }
         }));
-        stateSync('setUserInfo', arguments);
+        // 只传递args[0]保证不会将time也传递出去
+        // console.log('args和[args[0]]是一个东西吗:', arguments, [arguments[0]]);
+        stateSync('setUserInfo', [arguments[0]], time);
         return false;
     }
     // status表示是否选择展示在左侧
@@ -105,14 +109,14 @@ const useUserStore = create((set, get) => {
             status: false
         }
     ];
-    function setLeftSiderbarOptionsArr(newArr) {
+    function setLeftSiderbarOptionsArr(newArr, time? = Date.now()) {
         newArr = newArr.sort((cur, next) => cur.index - next.index);
         const oldArr = get().leftSiderbarOptionsArr.sort((cur, next) => cur.index - next.index);
         if (isEqual(newArr, oldArr)) return true;
         set((state) => ({
             leftSiderbarOptionsArr: newArr
         }));
-        stateSync('setLeftSiderbarOptionsArr', arguments);
+        stateSync('setLeftSiderbarOptionsArr', [arguments[0]], time);
         return false;
     }
     // 每个窗口的仓库都会自动执行这个，不用状态同步

@@ -1,13 +1,14 @@
-import { LOGIN_WINDOW } from '@shared/types/windows';
-
+import {
+    createUpdate,
+    getDataNameByStoreFuncName,
+    updateUpdateMapFiledTime
+} from '@shared/utils/update';
 // 不仅发送数据，还要更新updateMap中的时间戳
-function stateSync(funcName, args) {
-    IPC.notifyAllWindowUpdateState(funcName, JSON.stringify(...args));
-    IPC.updateUpdateMap();
-    console.log('传递的数据:', funcName, ...args);
-    // console.log('JSON.parse(args)', JSON.stringify(args));
-    // console.log('args', args);
-    // console.log('...args', ...args);
-    // console.log('JSON.parse(...args)', JSON.stringify(...args));
+function stateSync(funcName, args, time) {
+    updateUpdateMapFiledTime('userStore', getDataNameByStoreFuncName(funcName), time);
+    // console.log('stateSync更新数据完毕');
+    const update = createUpdate('userStore', funcName, JSON.stringify(...args));
+    console.log('stateSync发送的同步update:', update);
+    IPC.notifyAllWindowUpdateState(update);
 }
 export default stateSync;

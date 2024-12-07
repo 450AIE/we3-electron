@@ -222,14 +222,10 @@ ipcMain.on('createWindow', (_, windowName) => createWindow(windowName));
 ipcMain.on('destoryWindow', (_, windowName) => destoryWindow(windowName));
 
 // 将渲染进程发送来到函数和形参转发给所有窗口
-ipcMain.on('notify-all-window-update-state-from-renderer-process', (_, funcName, args) => {
+ipcMain.on('notify-all-window-update-state-from-renderer-process', (_, updata) => {
     windowStack.forEach((win) => {
         win &&
-            win.window.webContents.send(
-                'notify-all-window-update-state-from-main-process',
-                funcName,
-                args
-            );
+            win.window.webContents.send('notify-all-window-update-state-from-main-process', updata);
     });
 });
 
@@ -258,9 +254,9 @@ ipcMain.on('notify-all-window-new-window-created', (_, createdWindowName: string
 // 监听来自窗口转发给新创建窗口的zustand的状态信息，实现转发给新创建的窗口
 ipcMain.on(
     'renderer-send-main-to-send-updated-state-to-new-created-window',
-    (e, createdWindowName, jsonStore) => {
+    (e, createdWindowName, update) => {
         const win = findWindow(createdWindowName);
         console.log(e.processId, '向', win?.windowName, '发送');
-        win?.window.webContents.send('main-send-updated-state-to-new-created-window', jsonStore);
+        win?.window.webContents.send('main-send-updated-state-to-new-created-window', update);
     }
 );

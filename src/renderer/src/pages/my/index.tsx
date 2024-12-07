@@ -5,6 +5,7 @@ import useUpdateStateSync from '@renderer/hooks/useUpdateStateSync';
 import useBeforeCreatedGetUpdatedState from '@renderer/hooks/useBeforeCreatedGetUpdatedState';
 import { MY_WINDOW } from '@shared/types/windows';
 import { useEffect, useState } from 'react';
+import useInitialStoreInUpdateMap from '@renderer/hooks/useInitialStoreInUpdateMap';
 
 const optionList = [
     {
@@ -29,6 +30,7 @@ function My() {
     useUpdateStateSync();
     useBeforeCreatedGetUpdatedState(MY_WINDOW);
     const userStore = useUserStore();
+    useInitialStoreInUpdateMap(userStore);
     console.log('userStore', userStore);
     const [state, setState] = useState(0);
     return (
