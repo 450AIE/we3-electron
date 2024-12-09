@@ -22,6 +22,9 @@ function popWindow(name) {
 }
 
 function createWindow(windowName) {
+    const win = findWindow(windowName);
+    // 已经存在这个窗口了，就不创建了
+    if (win) return;
     console.log('开创窗口', windowName);
     switch (windowName) {
         case LOGIN_WINDOW:

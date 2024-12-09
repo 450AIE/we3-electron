@@ -1,0 +1,35 @@
+.container {
+    background-color: #fff;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    // display: flex;
+    // flex-direction: column;
+    :global {
+        .title {
+            height: 40px;
+            margin-bottom: -15px;
+            color: #aaa;
+        }
+        .one-week-box {
+            display: flex;
+            align-items: center;
+            .week-num {
+                text-align: center;
+                flex: 1;
+                margin: 6px 0;
+                color: #aaa;
+            }
+            .day-num {
+                text-align: center;
+                margin: 6px 0;
+                flex: 1;
+                &.vacation {
+                    color: lightcoral;
+                }
+            }
+            .day-num:nth-child(n + 7):nth-child(-n + 8) {
+                color: lightcoral;
+            }
+        }
+    }
+}
