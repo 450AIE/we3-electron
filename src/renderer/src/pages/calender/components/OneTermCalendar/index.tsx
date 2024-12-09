@@ -55,6 +55,7 @@ function OneTermCalendar({ termTimeList, mounthArr }: OneTermCalendarProps) {
                                         : termYear
                                 }
                                 timeList={mounth}
+                                showToday={true}
                             />
                         </li>
                     );

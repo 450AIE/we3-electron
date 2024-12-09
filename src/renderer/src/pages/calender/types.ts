@@ -25,5 +25,6 @@ export interface OneMounthCalendarProps {
     startWeekNum: number;
     mounth: number;
     year: number;
+    showToday: boolean;
     timeList: Array<string[]>;
 }

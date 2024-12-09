@@ -3,9 +3,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    user-select: none;
     :global {
         .item {
-            flex:1;
+            flex: 1;
+            // max-height: ;
             display: flex;
             flex-direction: column;
             align-items: center;

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTimeTableContext } from '../TimeTableContextProvider';
 import TimeTableOnePage from '../TimeTableOnePage';
 import styles from './index.module.scss';
@@ -6,8 +6,9 @@ import { Carousel } from 'antd';
 import { getCurrentDate } from '@renderer/utils/date';
 import LessonDetail from '../LessonDetail';
 import { LessonInfo } from '../../types';
+import { throttle } from 'lodash';
 
-function TimeTableContent() {
+function TimeTableContent({ height }) {
     const {
         totalPages,
         setCurrentPage,
@@ -59,19 +60,31 @@ function TimeTableContent() {
     }
     return (
         // 事件委托打开课表详情
-        <div className={styles.container} onClick={openLessonDetail}>
+        <div
+            className={styles.container}
+            id="capture-me"
+            onClick={openLessonDetail}
+            // ref={timeTableContainerRef}
+        >
             <Carousel
                 dots={false}
-                adaptiveHeight
                 draggable
+                style={{
+                    // backgroundColor: 'red',
+                    height: height + 'px'
+                }}
                 beforeChange={swiperToSetCurrentPage}
                 infinite={false}
                 initialSlide={getTheDateIsInWitchWeek(getCurrentDate(), '2024-09-09')}
             >
                 {/* idx就代表周数，第0周要做总的课表 */}
                 {new Array(totalPages).fill(null).map((_, idx) => (
-                    <div className="one-page " key={idx}>
-                        <TimeTableOnePage lessonInfo={conveyLessonInfo(idx)} weekNum={idx} />
+                    <div className="one-page" key={idx}>
+                        <TimeTableOnePage
+                            lessonInfo={conveyLessonInfo(idx)}
+                            weekNum={idx}
+                            height={height}
+                        />
                     </div>
                 ))}
             </Carousel>

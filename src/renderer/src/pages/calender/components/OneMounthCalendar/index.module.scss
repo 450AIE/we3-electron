@@ -11,6 +11,7 @@
             color: #aaa;
         }
         .one-week-box {
+            user-select: none;
             display: flex;
             align-items: center;
             .week-num {
@@ -25,6 +26,11 @@
                 flex: 1;
                 &.vacation {
                     color: lightcoral;
+                }
+                &.today {
+                    background-color: #44d07c;
+                    border-radius: 5px;
+                    color: #fff;
                 }
             }
             .day-num:nth-child(n + 7):nth-child(-n + 8) {

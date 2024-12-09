@@ -25,7 +25,17 @@ function initilizeTimeMap(timeMap) {
 
 initilizeTimeMap(timeMap);
 
-function OneMounthCalendar({ startWeekNum, timeList, mounth, year }: OneMounthCalendarProps) {
+function OneMounthCalendar({
+    startWeekNum,
+    timeList,
+    mounth,
+    year,
+    showToday
+}: OneMounthCalendarProps) {
+    let toMounth = new Date().getMonth() + 1;
+    let today = new Date().getDate();
+    if (showToday) {
+    }
     // 注意不确定这里直接startWeekNum++会不会报错，因为直接修改了props
     return (
         <div className={styles.container}>
@@ -35,11 +45,21 @@ function OneMounthCalendar({ startWeekNum, timeList, mounth, year }: OneMounthCa
             {timeList.map((oneWeekArr, index) => (
                 <ul className="one-week-box">
                     <li className="week-num">{startWeekNum++}</li>
-                    {oneWeekArr.map((oneDay, idx) => (
-                        <li className={`day-num ${oneDay.includes('.') ? '' : 'vacation'}`}>
-                            {oneDay.includes('.') ? oneDay.split('.')[1] : oneDay}
-                        </li>
-                    ))}
+                    {oneWeekArr.map((oneDay, idx) => {
+                        const isVacation = !oneDay.includes('.');
+                        let dayStr = oneDay;
+                        if (!isVacation) {
+                            dayStr = parseInt(oneDay.split('.')[1]);
+                        }
+                        const isToday = today === dayStr && toMounth === mounth;
+                        return (
+                            <li
+                                className={`day-num ${isVacation ? 'vacation' : ''} ${isToday ? 'today' : ''}`}
+                            >
+                                {dayStr}
+                            </li>
+                        );
+                    })}
                 </ul>
             ))}
         </div>

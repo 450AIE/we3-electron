@@ -1,14 +1,13 @@
-import { memo } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { darkenColor, getBgColor, getLocation } from '../../utils/common';
 import { useTimeTableContext } from '../TimeTableContextProvider';
 import styles from './index.module.scss';
 
-const TimeTableOnePage = memo(({ lessonInfo, weekNum }) => {
+const TimeTableOnePage = memo(({ lessonInfo, weekNum, height }) => {
     const {
         utils: { getWitchDayInThisWeek }
     } = useTimeTableContext();
-    // console.log('one-page又被执行了', weekNum);
-    // console.log('传递的lessonInfo', lessonInfo);
+    const [pageHeight, setPageHeight] = useState<number>();
     return (
         <div className={styles.container}>
             {lessonInfo?.length &&
@@ -21,9 +20,9 @@ const TimeTableOnePage = memo(({ lessonInfo, weekNum }) => {
                         data-startclock={lesson.time_slots[0]}
                         data-date={lesson.date}
                         style={{
-                            height: (100 / 12).toFixed(3) * lesson.time_slots.length + '%',
+                            height: (height / 12).toFixed(3) * lesson.time_slots.length + 'px',
                             width: (100 / 7).toFixed(3) + '%',
-                            top: (lesson.time_slots[0] - 1) * (100 / 12).toFixed(3) + '%',
+                            top: (lesson.time_slots[0] - 1) * (height / 12).toFixed(3) + 'px',
                             left:
                                 getWitchDayInThisWeek(lesson.date, weekNum) * (100 / 7).toFixed(3) +
                                 '%',

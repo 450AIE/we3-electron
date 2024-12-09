@@ -26,15 +26,15 @@ function App() {
             </Fragment>
             <Fragment>
                 <Splitter className={styles.container}>
-                    <Splitter.Panel defaultSize="20%" min="10%" max="20%">
+                    <Splitter.Panel defaultSize="20%" min="18%" max="30%">
                         <LeftSiderbar />
                     </Splitter.Panel>
-                    <Splitter.Panel defaultSize="50%" min="30%" max="50%">
+                    <Splitter.Panel defaultSize="50%" min="30%" max="70%">
                         {/* 一级路由 */}
                         {/* <FirstRouterView /> */}
                         <RouterView />
                     </Splitter.Panel>
-                    <Splitter.Panel min="30%">
+                    <Splitter.Panel min="10%">
                         {/* 二级路由 */}
                         <SecondaryRoutes />
                         {/* <RouterView /> */}
